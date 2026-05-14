@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin();
 
 export function useScrollFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,10 +15,11 @@ export function useScrollFadeIn() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: 60 },
+        { opacity: 0, y: 50, filter: "blur(8px)" },
         {
           opacity: 1,
           y: 0,
+          filter: "blur(0px)",
           duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
@@ -37,23 +37,22 @@ export function useScrollFadeIn() {
   return ref;
 }
 
-export function useStaggerChildren(stagger = 0.15) {
+export function useStaggerChildren(stagger = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const children = el.children;
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        children,
-        { opacity: 0, y: 40, scale: 0.95 },
+        el.children,
+        { opacity: 0, y: 35, filter: "blur(4px)" },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 0.8,
+          filter: "blur(0px)",
+          duration: 0.7,
           stagger,
           ease: "power2.out",
           scrollTrigger: {
