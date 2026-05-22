@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Anchor, Menu, X, Heart } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
@@ -30,18 +29,15 @@ export default function Navigation() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/50"
+          ? "bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/50"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-shadow">
-              <Anchor className="w-5 h-5 text-white" />
-            </div>
+          <Link href="#home" className="group">
             <span className="text-xl font-light tracking-wide text-white">
-              SeaSoul<span className="font-semibold text-cyan-400">Wellness</span>
+              SeaSoul<span className="font-normal text-slate-400">Wellness</span>
             </span>
           </Link>
 
@@ -50,17 +46,15 @@ export default function Navigation() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors relative group"
+                className="text-xs uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-cyan-400 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
             <Link
               href="#crisis"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 to-orange-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-rose-500/25 transition-all hover:scale-105"
+              className="px-5 py-2.5 border border-slate-700 text-slate-300 text-xs uppercase tracking-widest hover:border-slate-500 hover:text-white transition-colors"
             >
-              <Heart className="w-4 h-4" />
               Get Help
             </Link>
           </div>
@@ -69,7 +63,9 @@ export default function Navigation() {
             className="md:hidden text-white p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className="text-xs uppercase tracking-widest">
+              {mobileOpen ? "Close" : "Menu"}
+            </span>
           </button>
         </div>
       </div>
@@ -82,13 +78,13 @@ export default function Navigation() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800"
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
+            <div className="px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-slate-300 hover:text-cyan-400 transition-colors py-2"
+                  className="text-xs uppercase tracking-widest text-slate-400 hover:text-white transition-colors py-2"
                 >
                   {link.name}
                 </Link>
