@@ -2,40 +2,41 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/50">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          <div className="col-span-1 md:col-span-1">
-            <div className="mb-6">
-              <span className="text-xl font-light tracking-wide text-white">
-                SeaSoul<span className="font-normal text-slate-400">Wellness</span>
+    <footer className="bg-stone-950 border-t border-stone-800/40">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
+          <div className="md:col-span-5">
+            <div className="mb-8">
+              <span className="font-serif text-2xl font-light tracking-wide text-stone-100">
+                SeaSoul<span className="text-stone-500 italic">Wellness</span>
               </span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Dedicated mental health and psychology support for yacht crew members worldwide. 
+            <p className="text-stone-500 text-sm leading-[1.8] max-w-sm">
+              Dedicated mental health and psychology support for yacht crew members worldwide.
+              Because wellbeing at sea begins with care on shore.
             </p>
           </div>
 
-          <div>
-            <h4 className="text-xs uppercase tracking-widest text-white mb-6">Resources</h4>
-            <ul className="space-y-4 text-slate-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Therapy Sessions</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Guided Meditation</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Crisis Hotline</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Self-Help Library</a></li>
+          <div className="md:col-span-3 md:col-start-8">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-stone-600 mb-8 font-mono">Resources</h4>
+            <ul className="space-y-5 text-stone-500 text-sm">
+              <li><a href="#services" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">Therapy Sessions</a></li>
+              <li><a href="#meditation" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">Guided Meditation</a></li>
+              <li><a href="#crisis" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">Crisis Hotline</a></li>
+              <li><a href="#" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">Self-Help Library</a></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs uppercase tracking-widest text-white mb-6">Contact</h4>
-            <ul className="space-y-4 text-slate-400 text-sm">
+          <div className="md:col-span-3">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-stone-600 mb-8 font-mono">Contact</h4>
+            <ul className="space-y-5 text-stone-500 text-sm">
               <li>
-                <a href="mailto:support@seasoulwellness.com" className="hover:text-white transition-colors">
+                <a href="mailto:support@seasoulwellness.com" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">
                   support@seasoulwellness.com
                 </a>
               </li>
               <li>
-                <a href="tel:+18007324357" className="hover:text-white transition-colors">
+                <a href="tel:+18007324357" data-cursor-hover className="hover:text-stone-200 transition-colors duration-500">
                   +1 (800) SEA-HELP
                 </a>
               </li>
@@ -43,9 +44,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-xs">
-            &copy; 2026 SeaSoul Wellness. All rights reserved.
+        <div className="mt-24 pt-6 border-t border-stone-800/30 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-stone-700 text-[10px] uppercase tracking-widest font-mono">
+            &copy; 2026 SeaSoul Wellness
+          </p>
+          <p className="text-stone-700 text-[10px] uppercase tracking-widest font-mono">
+            All rights reserved
           </p>
         </div>
       </div>

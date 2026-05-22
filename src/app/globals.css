@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
 @theme inline {
@@ -10,10 +11,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant);
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -22,26 +24,73 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+/* Film grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: var(--grain);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* Custom scrollbar - thin, editorial */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #57534e;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #78716c;
 }
 
+/* Selection - warm amber */
 ::selection {
-  background: rgba(6, 182, 212, 0.3);
-  color: #fff;
+  background: rgba(251, 191, 36, 0.2);
+  color: #fafaf9;
+}
+
+/* Focus states - minimal */
+*:focus-visible {
+  outline: 1px solid #78716c;
+  outline-offset: 2px;
+}
+
+/* Link hover - underline animation */
+a {
+  text-decoration: none;
+}
+
+/* Editorial line dividers */
+.editorial-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #44403c 50%, transparent 100%);
+}
+
+/* Human text indent for quotes */
+.pull-quote {
+  text-indent: -0.5em;
+}
+
+/* Slight rotation for organic feel on decorative elements */
+.organic-tilt {
+  transform: rotate(-0.5deg);
+}
+
+.organic-tilt-reverse {
+  transform: rotate(0.5deg);
 }
