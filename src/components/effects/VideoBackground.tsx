@@ -32,7 +32,7 @@ export default function VideoBackground() {
         }`}
       >
         <source
-          src="https://videos.pexels.com/video-files/855564/855564-hd_1920_1080_25fps.mp4"
+          src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4"
           type="video/mp4"
         />
       </video>
