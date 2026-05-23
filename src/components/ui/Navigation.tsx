@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import LiveAvailability from "./LiveAvailability";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
-  { name: "Meditation", href: "#meditation" },
-  { name: "Community", href: "#community" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Locations", href: "#location-finder" },
   { name: "Crisis Support", href: "#crisis" },
 ];
 
@@ -41,7 +42,9 @@ export default function Navigation() {
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
+            <LiveAvailability />
+            <div className="w-px h-6 bg-stone-800" />
             {navLinks.map((link) => (
               <Link
                 key={link.name}

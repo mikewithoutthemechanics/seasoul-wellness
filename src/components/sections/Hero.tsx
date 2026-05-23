@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
-import OceanScene from "@/components/3d/OceanScene";
+import VideoBackground from "@/components/effects/VideoBackground";
 
 export default function Hero() {
   const labelRef = useRef<HTMLParagraphElement>(null);
@@ -30,7 +30,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-end overflow-hidden bg-stone-950 pb-24 md:pb-32"
     >
-      <OceanScene />
+      <VideoBackground />
 
       <div className="absolute inset-0 bg-gradient-to-b from-stone-950/20 via-transparent to-stone-950 z-10 pointer-events-none" />
 
