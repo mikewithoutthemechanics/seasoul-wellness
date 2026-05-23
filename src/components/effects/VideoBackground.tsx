@@ -34,8 +34,16 @@ export default function VideoBackground() {
 
   return (
     <div className="absolute inset-0 z-0">
-      {/* Animated gradient background as fallback/base */}
-      <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 animate-gradient" />
+      {/* Image fallback - always visible */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1920&q=80')",
+        }}
+      />
+
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-stone-900/80 via-stone-800/70 to-stone-950/90 animate-gradient" />
 
       <video
         ref={videoRef}
@@ -59,7 +67,7 @@ export default function VideoBackground() {
       </video>
 
       {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-stone-950/40 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-stone-950/30 mix-blend-multiply" />
     </div>
   );
 }
