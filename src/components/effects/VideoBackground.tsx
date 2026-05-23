@@ -32,14 +32,11 @@ export default function VideoBackground() {
     };
   }, []);
 
-  if (hasError) {
-    return (
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-stone-900 via-stone-950 to-stone-950" />
-    );
-  }
-
   return (
     <div className="absolute inset-0 z-0">
+      {/* Animated gradient background as fallback/base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 animate-gradient" />
+
       <video
         ref={videoRef}
         autoPlay
@@ -47,7 +44,7 @@ export default function VideoBackground() {
         loop
         playsInline
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-          isLoaded ? "opacity-100" : "opacity-0"
+          isLoaded && !hasError ? "opacity-100" : "opacity-0"
         }`}
         style={{ willChange: "opacity" }}
       >
@@ -61,15 +58,8 @@ export default function VideoBackground() {
         />
       </video>
 
-      {/* Fallback gradient while video loads */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 transition-opacity duration-1000 ${
-          isLoaded ? "opacity-0" : "opacity-100"
-        }`}
-      />
-
-      {/* Overlay for text readability - lighter to show video */}
-      <div className="absolute inset-0 bg-stone-950/30 mix-blend-multiply" />
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-stone-950/40 mix-blend-multiply" />
     </div>
   );
 }
