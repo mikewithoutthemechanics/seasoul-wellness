@@ -68,8 +68,8 @@ export default function VideoBackground() {
         }`}
       />
 
-      {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-stone-950/50 mix-blend-multiply" />
+      {/* Overlay for text readability - lighter to show video */}
+      <div className="absolute inset-0 bg-stone-950/30 mix-blend-multiply" />
     </div>
   );
 }
