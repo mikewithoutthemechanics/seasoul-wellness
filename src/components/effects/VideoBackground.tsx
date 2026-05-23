@@ -5,22 +5,41 @@ import { useRef, useEffect, useState } from "react";
 export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleLoadedData = () => setIsLoaded(true);
-    video.addEventListener("loadeddata", handleLoadedData);
+    const handleError = () => {
+      console.error("Video failed to load");
+      setHasError(true);
+    };
 
-    return () => video.removeEventListener("loadeddata", handleLoadedData);
+    video.addEventListener("loadeddata", handleLoadedData);
+    video.addEventListener("error", handleError);
+
+    // Force play
+    video.play().catch((err) => {
+      console.error("Video autoplay failed:", err);
+      setHasError(true);
+    });
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoadedData);
+      video.removeEventListener("error", handleError);
+    };
   }, []);
+
+  if (hasError) {
+    return (
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-stone-900 via-stone-950 to-stone-950" />
+    );
+  }
 
   return (
     <div className="absolute inset-0 z-0">
-      {/* Placeholder - replace with actual video URL */}
-      {/* Recommended: Use a calm ocean/water video from Pexels, Pixabay, or similar */}
-      {/* Example: https://videos.pexels.com/video-files/855564/855564-hd_1920_1080_25fps.mp4 */}
       <video
         ref={videoRef}
         autoPlay
@@ -30,7 +49,12 @@ export default function VideoBackground() {
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
+        style={{ willChange: "opacity" }}
       >
+        <source
+          src="https://cdn.coverr.co/videos/coverr-calm-ocean-water-2568/1080p.mp4"
+          type="video/mp4"
+        />
         <source
           src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4"
           type="video/mp4"
@@ -45,7 +69,7 @@ export default function VideoBackground() {
       />
 
       {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-stone-950/60 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-stone-950/50 mix-blend-multiply" />
     </div>
   );
 }

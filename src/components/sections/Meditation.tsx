@@ -11,21 +11,25 @@ const meditations = [
     title: "Ocean Breathing",
     duration: "5 min",
     description: "Sync your breath with the rhythm of the waves for deep relaxation.",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   },
   {
     title: "Night Watch Calm",
     duration: "10 min",
     description: "Find peace during irregular hours and night shifts at sea.",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   },
   {
     title: "Morning Deck Reset",
     duration: "7 min",
     description: "Start your day with clarity and positive intention.",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
   },
   {
     title: "Inner Compass",
     duration: "15 min",
     description: "Guided visualization to reconnect with your purpose and direction.",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   },
 ];
 
@@ -37,7 +41,9 @@ function MeditationCard({
   index: number;
 }) {
   const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -62,12 +68,43 @@ function MeditationCard({
     return () => ctx.revert();
   }, [index]);
 
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio.play();
+      setPlaying(true);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const progress = (audio.currentTime / audio.duration) * 100;
+    setProgress(progress);
+  };
+
+  const handleEnded = () => {
+    setPlaying(false);
+    setProgress(0);
+  };
+
   return (
     <div
       ref={cardRef}
       className="group relative border border-stone-800 hover:border-stone-600 transition-colors duration-700"
       style={{ perspective: "1000px" }}
     >
+      <audio
+        ref={audioRef}
+        src={item.audioUrl}
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={handleEnded}
+      />
       <div className="p-8">
         <div className="flex items-start justify-between mb-8">
           <div>
@@ -80,12 +117,24 @@ function MeditationCard({
           {item.description}
         </p>
 
+        {/* Progress bar */}
+        {playing && (
+          <div className="mb-6">
+            <div className="h-1 bg-stone-800">
+              <div
+                className="h-full bg-stone-600 transition-all duration-100"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        )}
+
         <button
           data-cursor-hover
-          onClick={() => setPlaying(!playing)}
+          onClick={togglePlay}
           className="w-full py-3 border border-stone-700 text-stone-400 text-[10px] tracking-[0.2em] uppercase hover:border-stone-500 hover:text-stone-200 transition-colors duration-500"
         >
-          {playing ? "Playing" : "Begin Session"}
+          {playing ? "Pause" : "Begin Session"}
         </button>
       </div>
     </div>
